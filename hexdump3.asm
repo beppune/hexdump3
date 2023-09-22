@@ -13,7 +13,7 @@ extern DumpChar
 
 section .data
 
-	DumpLin: db " 00 00 00 00"
+	DumpLin: db " 00 00 00 00",0Ah
 	DUMPLEN		equ $-DumpLin
 
 section .text
@@ -23,7 +23,13 @@ _start:
 	nop
 
 		mov eax, 0FAh
-		mov edi, DumpLin
+        mov ecx, 1
+
+        mov edi, ecx
+        shl edi, 1
+        add edi, ecx
+
+		lea edi, [DumpLin + edi]
 
 		call DumpChar
 
