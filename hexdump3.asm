@@ -13,17 +13,21 @@ extern DumpChar
 
 section .data
 
-	DumpLin: db " 00 00 00 00",0Ah
+	DumpLin: db " 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 "
 	DUMPLEN		equ $-DumpLin
+    TextLin: db "|................|",0Ah
+    TEXTLEN     equ $-TextLin
+    FULLLEN     equ $-DumpLin
 
+	
 section .text
 
 _start:
 
 	nop
 
-		mov eax, 0FAh
-        mov ecx, 1
+		mov eax, 057h
+        mov ecx, 15
 
         mov edi, ecx
         shl edi, 1
@@ -36,7 +40,7 @@ _start:
 		mov eax, 4
 		mov ebx, 1
 		mov ecx, DumpLin
-		mov edx, DUMPLEN
+		mov edx, FULLLEN
 		int 80h
 
 Exit:	mov eax, 1		; sys_exit
