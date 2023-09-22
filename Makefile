@@ -9,10 +9,12 @@ procs.o:	procs.asm
 	nasm  -f elf32 -g  -o procs.o procs.asm
 
 clean:
-	rm hexdump3 hexdump3.o
+	rm hexdump3 hexdump3.o procs.o
 
 ifneq ($(EDITOR),)
 e:
 	${EDITOR} hexdump3.asm
 endif
 
+run: hexdump3
+	./hexdump3
