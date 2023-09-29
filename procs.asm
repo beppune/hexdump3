@@ -1,5 +1,5 @@
 
-global DumpChar
+global DumpChar, TextChar
 
 section .data
  
@@ -53,13 +53,31 @@ section .text
 
 		pop ebx					; restore ebx
 		
-		ret						; return from procedire
+		ret						; return from procedure
 		HexStr: db "0123456789ABCDEF"
 
 
+    ; TextChar:     Put translated ascii representation in text string
+    ; UPDATED:      29/09/2023
+    ; INPUT:        AL:     byte value to translate
+    ;               EDI:    Base of Text: '|................|'
+    ; OUTPUT:       None
+    ; MODIFIES:     [EDI + ECX + 1] 
+    
     TextChar:
-        
+        push ebx                    ; save ebx
+
+        xor ebx, ebx                ; zero ebx
+
+        mov bl, [DotXlat + eax]     ; copy translated byte from DotXlat
+        mov [edi + ecx + 1], bl     ; copy translated byte to destination
+
+        pop ebx                     ; restore ebx
+
+        ret                         ; return from procedure
 
 
-        
+
+
+
 

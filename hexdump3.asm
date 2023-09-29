@@ -9,7 +9,7 @@
 ;
 
 global _start
-extern DumpChar
+extern DumpChar, TextChar
 
 section .data
 
@@ -26,7 +26,7 @@ _start:
 
 	nop
 
-		mov eax, 057h
+		mov eax, 039h
         mov ecx, 15
 
         mov edi, ecx
@@ -36,6 +36,10 @@ _start:
 		lea edi, [DumpLin + edi]
 
 		call DumpChar
+
+        mov edi, TextLin
+
+        call TextChar
 
 		mov eax, 4
 		mov ebx, 1
